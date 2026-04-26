@@ -15,10 +15,25 @@ This repository combines exploratory predictive modeling with business-focused c
 
 ## 📂 Project Structure
 
+### 1. Modular ML Pipeline (Sync-Ready)
+This project is structured like a production-grade software application, allowing the dashboard/frontend to "sync" with the pre-trained models.
+- **`train.py`**: Ingests household data, applies a PCA pipeline for noise reduction, trains the models, and serializes them to the `models/` directory.
+- **`predict.py`**: A deployment script that instantly loads the `.joblib` model and scores new leads in milliseconds without needing to retrain.
+- **`models/`**: Stores the serialized `.joblib` model files.
+- **`requirements.txt`**: Strict dependency locks to ensure the environment syncs perfectly across machines.
+
+### 2. Exploratory Notebooks
 - **`solar_analysis.ipynb`**: The core ML pipeline where the ROI Classifier and Payback regressions are trained.
 - **`Solar_mini.ipynb`**: An exploratory notebook analyzing the specific relationships between Indian government subsidies, household size, and grid metrics to predict the final post-solar electricity bill.
 - **`solar_dashboard_full.ipynb`**: An interactive dashboard simulation. A sales rep can plug in a prospect's data here and instantly receive their "Lead Score" and financial projections.
 - **`solar_project_compact.ipynb`**: A streamlined, production-ready version of the analysis.
+
+## 💻 Running Locally
+
+To run the modular pipeline:
+1. **Install dependencies:** `pip install -r requirements.txt`
+2. **Train & Sync the model:** `python train.py` (This will output `high_roi_classifier.joblib` to the `models/` directory).
+3. **Score a new Lead:** `python predict.py`
 
 ## 🚀 Impact
 
